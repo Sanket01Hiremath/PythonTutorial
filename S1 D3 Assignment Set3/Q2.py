@@ -1,0 +1,9 @@
+dict={}
+dict['Sanket']=25
+dict['Sanket1']=26
+dict['Sanket2']=27
+print(dict)
+dict.update(Sanket=23)
+print(dict)
+dict.pop('Sanket')
+print(dict)
