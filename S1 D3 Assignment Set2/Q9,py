@@ -1,0 +1,9 @@
+sample_dict = {
+    "name": "Kelly",
+    "age": 25,
+    "salary": 8000,
+    "city": "New york"}
+
+selected_keys = ['name', 'salary']
+selected_info = dict((key, value) for key, value in sample_dict.items() if key in selected_keys)
+print(selected_info)
