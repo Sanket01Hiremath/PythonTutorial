@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>home</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Restaurants</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <ul class="list-group">
+                    {% for key, value in json_data.items %}
+                    <a href="{% url 'restaurant_view' key=key %}">
+                        <li class="list-group-item">
+                            <ul>
+                                {% for sub_key, sub_value in value.items %}
+                                <li class="list-group-item">
+                                    <ul>
+                                        {% if sub_value.items|length > 0 %}
+                                            <ul>
+                                                {% for inner_sub_key, inner_sub_value in sub_value.items %}
+                                                    <li>
+                                                        {{ inner_sub_key }}:{{ inner_sub_value }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% else %}
+                                            {{sub_value}}
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <a href="/register" {% if btn_dis %} style="pointer-events: none; cursor: not-allowed;" {% endif %}>Add New</a>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
