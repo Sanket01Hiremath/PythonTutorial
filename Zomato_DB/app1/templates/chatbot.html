@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <div>
+        <h1>Chat with the Chatbot</h1>
+        <div id="chatbox">
+            <!-- Chat messages will appear here -->
+        </div>
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatbox = document.getElementById("chatbox");
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("send-button");
+
+        sendButton.addEventListener("click", async () => {
+            const userMessage = userInput.value;
+            chatbox.innerHTML += `<p>You: ${userMessage}</p>`;
+
+            const response = await fetch("/chatbot/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `user_message=${encodeURIComponent(userMessage)}&conversation_history=${encodeURIComponent(chatbox.innerHTML)}`
+            });
+
+            const responseData = await response.json();
+            const chatbotResponse = responseData.chatbot_response;
+            chatbox.innerHTML += `<p>Chatbot: ${chatbotResponse}</p>`;
+
+            userInput.value = "";
+        });
+    </script>
+</body>
+</html>
