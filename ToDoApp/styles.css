@@ -1,0 +1,27 @@
+/* Add any additional custom styles here */
+
+#taskList .task-item:hover {
+    background-color: #f7fafc;
+}
+
+/* Style for the buttons */
+.task-item .task-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.task-item .btn-toggle-status {
+    order: 1; /* Reorder to place before Delete button */
+    margin-right: 0.5rem;
+    width:fit-content;
+}
+
+.task-item .btn-delete-task {
+    order: 2;
+    color: #e53e3e;
+    width:fit-content;
+}
+
+.btn-div{
+    width: fit-content;
+}
