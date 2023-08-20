@@ -1,0 +1,112 @@
+p1):
+db.createCollection("Customers")
+{
+    "_id": ObjectId,
+    "name": String,
+    "email": String,
+    "Address": String,
+    "mobile": String,
+}
+
+p2):
+db.Customers.insertMany([
+  {
+    "_id": ObjectId(),
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "address": "456 Elm St, Town",
+    "phone_number": "987-654-3210"
+  },
+  {
+    "_id": ObjectId(),
+    "name": "Bob Smith",
+    "email": "bob@example.com",
+    "address": "789 Oak Ave, Village",
+    "phone_number": "555-123-4567"
+  },
+  {
+    "_id": ObjectId(),
+    "name": "Eve Brown",
+    "email": "eve@example.com",
+    "address": "321 Pine Rd, City",
+    "phone_number": "111-222-3333"
+  },
+  {
+    "_id": ObjectId(),
+    "name": "Charlie Davis",
+    "email": "charlie@example.com",
+    "address": "987 Maple Ln, Suburb",
+    "phone_number": "888-999-0000"
+  },
+  {
+    "_id": ObjectId(),
+    "name": "Grace Wilson",
+    "email": "grace@example.com",
+    "address": "555 Cedar Dr, Countryside",
+    "phone_number": "444-555-6666"
+  }
+])
+
+p3):
+var allCustomers = db.Customers.find()
+
+allCustomers.forEach(function(customer) {
+  printjson(customer);
+});
+
+p4):
+var selectedFields = db.Customers.find({}, { name: 1, email: 1, _id: 0 })
+
+selectedFields.forEach(function(customer) {
+  printjson(customer);
+});
+
+p5):
+var customerId = ObjectId("3");
+var customer = db.Customers.findOne({ _id: customerId })
+
+printjson(customer);
+
+p6):
+// Fetch all customers whose name starts with 'A'
+var customersStartingWithA = db.Customers.find({ name: /^A/ })
+
+// Print each customer document
+customersStartingWithA.forEach(function(customer) {
+  printjson(customer);
+});
+
+p7):
+// Fetch all customers, ordered by name in descending order
+var sortedCustomers = db.Customers.find().sort({ name: -1 })
+
+// Print each customer document
+sortedCustomers.forEach(function(customer) {
+  printjson(customer);
+});
+
+p8):
+// Update the address of the customer with the given _id
+var customerId = ObjectId("your_id_here");  // Replace with the actual ObjectId value
+var updatedAddress = "New Address";  // Replace with the new address
+
+db.Customers.updateOne(
+  { _id: customerId },
+  { $set: { address: updatedAddress } }
+)
+
+p9):
+// Fetch the top 3 customers ordered by _id in ascending order
+var topCustomers = db.Customers.find().sort({ _id: 1 }).limit(3)
+
+// Print each customer document
+topCustomers.forEach(function(customer) {
+  printjson(customer);
+});
+
+p10):
+// Delete the customer with the given _id
+var customerId = ObjectId("your_id_here");  // Replace with the actual ObjectId value
+
+db.Customers.deleteOne({ _id: customerId })
+
