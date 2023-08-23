@@ -1,7 +1,29 @@
-<div>Teachable Machine Image Model</div>
-<button type="button" onclick="init()">Start</button>
-<div id="webcam-container"></div>
-<div id="label-container"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine Image Model</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #webcam-container {
+            border: 5px solid red; /* Initial border color */
+            transition: border-color 0.5s; /* Smooth transition for color change */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1>Teachable Machine Image Model</h1>
+            <button id="startButton" class="btn btn-primary" type="button" onclick="init()">Start</button>
+            <button id="stopButton" class="btn btn-danger" type="button" onclick="stop()" disabled>Stop</button>
+        </div>
+        <div class="text-center mt-3">
+            <div id="webcam-container" class="d-inline-block"></div>
+        </div>
+        <div id="label-container" class="text-center mt-3"></div>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -9,12 +31,14 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "https://teachablemachine.withgoogle.com/models/[...]";
+    const URL = "https://teachablemachine.withgoogle.com/models/HqQqBy16F/";
 
     let model, webcam, labelContainer, maxPredictions;
 
     // Load the image model and setup the webcam
     async function init() {
+        document.getElementById("startButton").disabled = true;
+        document.getElementById("stopButton").disabled = false;
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -40,6 +64,16 @@
         }
     }
 
+    async function stop() {
+        webcam.stop();
+        document.getElementById("webcam-container").innerHTML="";
+        labelContainer.innerHTML = "";
+
+        // Enable and disable buttons
+        document.getElementById("startButton").disabled = false;
+        document.getElementById("stopButton").disabled = true;
+    }
+
     async function loop() {
         webcam.update(); // update the webcam frame
         await predict();
@@ -50,10 +84,24 @@
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
+        const webcamContainer = document.getElementById("webcam-container");
+
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
-        }
+            const humanProbability = prediction[0].probability;
+
+            // Update the border color based on the prediction
+            if (humanProbability >= 0.05) {
+                webcamContainer.style.borderColor = "red";
+            } else {
+                webcamContainer.style.borderColor = "green";
+            }
+        } 
     }
 </script>
+</body>
+</html>
+
+
