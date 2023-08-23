@@ -1,0 +1,7 @@
+<div class="flex items-center">
+    <input type="checkbox" class="mr-2" [checked]="todo.completed" />
+    <span [ngClass]="{'line-through': todo.completed}">
+      {{ todo.text }}
+    </span>
+  </div>
+  

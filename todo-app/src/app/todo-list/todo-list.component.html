@@ -1,0 +1,27 @@
+<div *ngFor="let todo of todos" class="flex items-center border p-4 my-2">
+    <div *ngIf="!todo.editMode; else editModeTemplate">
+      <!-- Display todo information -->
+      <div class="md:flex-shrink-0">
+        <input type="checkbox" class="mr-5" [checked]="todo.completed" style="pointer-events: none;"/>
+        <span [ngClass]="{'line-through': todo.completed}" class="todo_text">
+          {{ todo.text }}
+        </span>
+      </div>
+      <div class="mt-2">
+        <button class="bg-red-500 text-white px-2 py-1 mr-2" (click)="deleteTodo(todo)">Delete</button>
+        <button class="bg-blue-500 text-white px-2 py-1 mr-2" (click)="toggleEditMode(todo)">Edit</button>
+        <button class="bg-green-500 text-white px-2 py-1" (click)="completeTodo(todo)">Complete</button>
+      </div>
+    </div>
+    <ng-template #editModeTemplate>
+      <!-- Edit mode template -->
+      <input type="text" [(ngModel)]="todo.editedText" />
+      <button class="bg-blue-500 text-white px-2 py-1 mr-2" (click)="saveEditedText(todo)">Save</button>
+      <button class="bg-gray-500 text-white px-2 py-1" (click)="cancelEdit(todo)">Cancel</button>
+    </ng-template>
+  </div>  
+  
+
+  
+  
+

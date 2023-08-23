@@ -1,0 +1,28 @@
+.nav-button {
+    background-color: #3490dc74;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-right: 1rem;
+  }
+  
+  .nav-button:hover {
+    background-color: #7070706e;
+    transform: translateY(-2px);
+  }
+
+  .heading{
+    font-size: 4vw;
+    font-weight: 500;
+    font-family: fantasy;
+  }
+
+  .logo{
+    width:10vw;
+    margin-right: 5vw;
+  }
+  .nav_bar{
+    margin-bottom: 2vw;
+  }
