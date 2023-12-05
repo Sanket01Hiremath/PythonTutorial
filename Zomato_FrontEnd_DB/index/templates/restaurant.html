@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Key-Value Pairs</title>
+    <title>Restaurants</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -27,13 +27,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item mr-sm-2">
-                    <a class="nav-link, btn btn-secondary" href="#">Home</a>
+                    <a class="nav-link, btn btn-secondary" href=#>Home</a>
                 </li>
                 <li class="nav-item mr-sm-2">
-                    <a class="nav-link, btn btn-secondary" href="/orders">All Orders</a>
+                    <a class="nav-link, btn btn-secondary" href="{% url 'all_orders' %}" {% if btn_dis %} style="pointer-events: none; cursor: not-allowed;" {% endif %} >All Orders</a>
+                </li>
+                <li class="nav-item mr-sm-2">
+                    <a class="nav-link, btn btn-secondary" href="{% url 'inventory_link' %}" {% if btn_dis %} style="pointer-events: none; cursor: not-allowed;" {% endif %} >Manage Inventory</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link, btn btn-secondary" href="/inventory" {% if btn_dis %} style="pointer-events: none; cursor: not-allowed;" {% endif %}>Manage Inventory</a>
+                    <a class="nav-link, btn btn-secondary" href="{% url 'cart_view' %}" >My Cart</a>
                 </li>
             </ul>
         </div>
@@ -59,7 +62,7 @@
             {% endfor %}
         </div>
         <div class="container1">
-            <a class="nav-link, btn btn-success btn-block" href="/order_summary">order</a>
+            <a class="nav-link, btn btn-success btn-block" href="{% url 'cart_view' %}">Add to cart</a>
         </div>
     </div>
 
@@ -69,27 +72,3 @@
 
 </body>
 </html>
-
-<!-- {% for key, value in restaurant.items %}
-            {% if value.items|length > 0 %}
-            <div class="card-deck" style="padding-bottom:50px;">
-                {% for sub_key, sub_value in value.items %}
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ sub_key }}</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <li class="btn">
-                                    <a class="btn btn-primary" href="/add_order/{{sub_key}}">
-                                        Rs: {{sub_value}}
-                                    </a>
-                                </li>
-                            </div>
-                        </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <hr>
-                <h1 class="text-center">{{value}}</h1>
-            <hr>
-            {% endif %}
-        {% endfor %} -->

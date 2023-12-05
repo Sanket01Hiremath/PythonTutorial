@@ -88,8 +88,14 @@
             <li class="nav-item mr-sm-2">
                 <a class="nav-link, btn btn-secondary" href="#">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link,  btn btn-secondary" href="/register" {% if btn_dis %} style="pointer-events: none; cursor: not-allowed;" {% endif %}>Add New</a>
+            <li class="nav-item mr-sm-2">
+                <a class="nav-link,  btn btn-secondary" href="/add_res" {% if btn_dis %} style="pointer-events: none; cursor: not-allowed;" {% endif %}>Add New</a>
+            </li>
+            <li class="nav-item mr-sm-2">
+                <a class="nav-link, btn btn-secondary" href="{% url 'cart_view' %}" >My Cart</a>
+            </li>
+            <li class="nav-item mr-sm-2">
+                <a class="nav-link,  btn btn-secondary" href="/logout">Logout</a>
             </li>
         </ul>
         </div>
@@ -125,22 +131,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-<!-- {% for sub_key, sub_value in value.items %}
-                    {% if sub_value.items|length > 0 %}
-                    <div class="menu">
-                        <button class="btn btn-secondary btn-block">Today's Menu</button>
-                        {% for inner_sub_key, inner_sub_value in sub_value.items %}
-                        <div>
-                            {{ inner_sub_key }}
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                        <div>
-                            <h5 class="card-title">{{ sub_value }}</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    {% endif %}
-                {% endfor %}  -->
